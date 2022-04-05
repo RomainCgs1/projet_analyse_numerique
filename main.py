@@ -1,5 +1,5 @@
 import math
-
+import matplotlib.pyplot as plt
 import numpy as np
 
 def print_hi(name):
@@ -35,9 +35,21 @@ def balayAleat(f, a, b, n):
         y.append(f(i))
     return min(y)
 
+def erreur(N,a,b,f):
+    for i in range(1,N+1):
+        y=balayage_const(a,b,N,f)-minReel
+        z=balayAleat(f,a,b,N)-minReel
+        plt.plot(i, y, color='green', linestyle='dashed', linewidth=2, marker='o', markerfacecolor='green',
+                    markersize=5)
+        plt.plot(i, z, color='black', linestyle='dashed', linewidth=2, marker='o', markerfacecolor='black',
+                 markersize=5)
+    plt.show()
+
 if __name__ == '__main__':
     #nom = input("Quel est ton nom ? ")
     #nom = nom.title()
     #print_hi(nom)
-    balayage_const(0,3,6,f)
+    N = 6
+    balayage_const(0,3,N,f)
     print(balayAleat(f, 0, 3, 30))
+    erreur(N,0,3,f)
