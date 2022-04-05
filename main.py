@@ -1,3 +1,4 @@
+import numpy as np
 
 def print_hi(name):
     print("Salut", name, "!")
@@ -8,13 +9,18 @@ def f(x):
 # méthode par balayage à pas constant
 def balayage_const(a, b, N, f):
     liste=[]
-
-    x=(a-b)/N
-    for i in range (1, N+1):
+    x=[]
+    pas=(b-a)/N
+    for k in range(N+1):
+        x.append(a)
+        a=a+pas
+    print('x = ', x)
+    #x=np.arange(a,b,pas)
+    for i in x:
         liste.append(f(i))
-        print(f(i))
+        #print(f(i))
     r=min(liste)
-    print(a, ',', b, ',', N, ',', x, ',', liste, ',', r)
+    print('a = ', a, '\nb = ', b, '\nN = ', N, '\nliste = ', liste, '\nr = ', r)
     return r
 
 # méthode par balayage aléatoire
