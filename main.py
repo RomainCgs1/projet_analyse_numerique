@@ -1,14 +1,14 @@
+import math
+
 import numpy as np
-import random
-
-import numpy
-
 
 def print_hi(name):
     print("Salut", name, "!")
 
 def f(x):
     return x**3 - 3*x**2 + 2*x + 5
+
+minReel = 5 - 2/(3*math.sqrt(3))
 
 # méthode par balayage à pas constant
 def balayage_const(a, b, N, f):
@@ -29,7 +29,7 @@ def balayage_const(a, b, N, f):
 
 # méthode par balayage aléatoire
 def balayAleat(f, a, b, n):
-    x = numpy.random.uniform(a, b, size=(n+1, 1))
+    x = np.random.uniform(a, b, size=(n+1, 1))
     y = []
     for i in x:
         y.append(f(i))
