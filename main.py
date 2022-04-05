@@ -4,5 +4,5 @@ def print_hi(name):
 
 if __name__ == '__main__':
     nom = input("Quel est ton nom ? ")
-    nom.title()
+    nom = nom.title()
     print_hi(nom)
