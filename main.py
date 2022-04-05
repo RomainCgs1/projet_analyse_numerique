@@ -15,13 +15,13 @@ def balayage_const(a, b, N, f):
         print(f(i))
     r=min(liste)
     print(a, ',', b, ',', N, ',', x, ',', liste, ',', r)
-    return x
+    return r
 
 # méthode par balayage aléatoire
 
 
 if __name__ == '__main__':
-    nom = input("Quel est ton nom ? ")
-    nom = nom.title()
-    print_hi(nom)
+    #nom = input("Quel est ton nom ? ")
+    #nom = nom.title()
+    #print_hi(nom)
     balayage_const(1,3,6,f)
