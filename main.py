@@ -69,4 +69,5 @@ if __name__ == '__main__':
     print("valeur max: ", -1*balayAleat(moinsf, -1, 2, n))
 
     nGrad = 30
-    print("Min via gradient : ", methodeDuGradient(f, derivF, 0, 1, -0.1, nGrad))
+    u = -0.1
+    print("Min via gradient : ", methodeDuGradient(f, derivF, 0, 1, u, nGrad))
