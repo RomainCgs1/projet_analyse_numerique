@@ -3,6 +3,7 @@ import random
 
 import matplotlib.pyplot as plt
 import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
 
 
 def print_hi(name):
@@ -57,6 +58,32 @@ def methodeDuGradient(f, df, a, b, u, n):
         x = x + u * df(x)
     return f(x)
 
+def g(x, y):
+    return (x ** 2) / 2 + (y ** 2) / (2 / 7)
+
+def h(x, y):
+    return np.cos(x) * np.sin(y)
+
+def figure3D(f):
+    ax = Axes3D(plt.figure())
+    f = np.vectorize(f)
+    X = np.arange(-8, 8, 0.01)
+    Y = np.arange(-8, 8, 0.01)
+    X, Y = np.meshgrid(X, Y)
+    Z = f(X, Y)
+    ax.plot_surface(X, Y, Z)
+    plt.show()
+
+def courbeNiveau(f):
+    f = np.vectorize(f)
+    X = np.arange(-6, 6, 0.01)
+    Y = np.arange(-6, 6, 0.01)
+    X, Y = np.meshgrid(X, Y)
+    Z = f(X, Y)
+    plt.axis('equal')
+    plt.contour(X, Y, Z, [0.1, 0.4, 0.5])
+    plt.show()
+
 if __name__ == '__main__':
     n = 400 #nombre d'intervalles
     print("Minimum de la fonction entre 0 et 3 :")
@@ -71,3 +98,6 @@ if __name__ == '__main__':
     nGrad = 30
     u = -0.1
     print("Min via gradient : ", methodeDuGradient(f, derivF, 0, 1, u, nGrad))
+
+    figure3D(h)
+    courbeNiveau(h)
