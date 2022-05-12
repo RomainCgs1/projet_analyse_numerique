@@ -114,13 +114,11 @@ def gradpc(eps, m, u, x0, y0, df1, df2, f):
         x1 = x + u*grad(x, y, df1, df2)[0]
         y1 = y + u*grad(x, y, df1, df2)[1]
         a.append((x1, y1))
-        print(i)
         i += 1
 
     ax = plt.axes(projection='3d')
     X = [A[0] for A in a]
     Y = [A[1] for A in a]
-    X, Y = np.meshgrid(X, Y)
     Z = [f(x, y) for (x, y) in a]
     plt.axis('auto')
     ax.scatter3D(X, Y, Z, c=Z, cmap='Greens')
