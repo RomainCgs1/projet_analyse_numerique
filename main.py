@@ -1,6 +1,5 @@
 import math
 import random
-
 import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
@@ -19,6 +18,16 @@ def moinsf(x):
 
 def derivF(x):
     return 3 * x ** 2 - 6 * x + 2
+
+def grad(x, y, dfx, dfy):
+    return (dfx(x), dfy(y))
+
+def norme(vect):
+    r = 0
+    for a in vect:
+        r += a**2
+    return math.sqrt(r)
+
 
 minReel = 5 - 2 / (3 * math.sqrt(3))
 maxReel = 5 + 2 / (3 * math.sqrt(3))
@@ -58,11 +67,23 @@ def methodeDuGradient(f, df, a, b, u, n):
         x = x + u * df(x)
     return f(x)
 
-def g(x, y):
-    return (x ** 2) / 2 + (y ** 2) / (2 / 7)
+def g(x, y, a, b):
+    return (x ** 2) / a + (y ** 2) / b
+
+def dgx(x, y, a, b):
+    return 2 * x / a
+
+def dgy(x, y, a, b):
+    return 2 * y / b
 
 def h(x, y):
     return np.cos(x) * np.sin(y)
+
+def dhx(x, y):
+    return - math.sin(x) * math.sin(y)
+
+def dhy(x, y):
+    return math.cos(x) * math.cos(y)
 
 def figure3D(f):
     ax = Axes3D(plt.figure())
@@ -84,20 +105,39 @@ def courbeNiveau(f):
     plt.contour(X, Y, Z, [0.1, 0.4, 0.5])
     plt.show()
 
+def gradpc(eps, m, u, x0, y0, df1, df2, f):
+    a = [(x0, y0)]
+    i = 0
+    while i < m or norme(grad(a[i][0], a[i][1], df1, df2)) < eps:
+        x = a[i-1][0]
+        y = a[i-1][1]
+        a.append((x + u*grad(x, y, df1, df2), y + u*grad(x, y, df1, df2)))
+        i += 1
+
+    ax = plt.axes(projection='3d')
+    X = [A[0] for A in a]
+    Y = [A[1] for A in a]
+    X, Y = np.meshgrid(X, Y)
+    Z = [f(x, y) for (x, y) in a]
+    plt.axis('equal')
+    ax.scatter3D(X, Y, Z, c=Z, cmap='Greens')
+
+
 if __name__ == '__main__':
-    n = 400 #nombre d'intervalles
-    print("Minimum de la fonction entre 0 et 3 :")
-    print("Balayage à pas constant : ", balayage_const(f, 0, 3, n))
-    print("Balayage aléatoire : ", float(balayAleat(f, 0, 3, n)))
-
-    #erreur(f, 0, 3, N)
-
-
-    print("valeur max: ", -1*balayAleat(moinsf, -1, 2, n))
-
-    nGrad = 30
-    u = -0.1
-    print("Min via gradient : ", methodeDuGradient(f, derivF, 0, 1, u, nGrad))
-
-    figure3D(h)
-    courbeNiveau(h)
+    pass
+    # n = 400 #nombre d'intervalles
+    # print("Minimum de la fonction entre 0 et 3 :")
+    # print("Balayage à pas constant : ", balayage_const(f, 0, 3, n))
+    # print("Balayage aléatoire : ", float(balayAleat(f, 0, 3, n)))
+    #
+    # #erreur(f, 0, 3, N)
+    #
+    #
+    # print("valeur max: ", -1*balayAleat(moinsf, -1, 2, n))
+    #
+    # nGrad = 30
+    # u = -0.1
+    # print("Min via gradient : ", methodeDuGradient(f, derivF, 0, 1, u, nGrad))
+    #
+    # figure3D(h)
+    # courbeNiveau(h)
