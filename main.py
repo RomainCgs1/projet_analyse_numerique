@@ -20,7 +20,7 @@ def derivF(x):
     return 3 * x ** 2 - 6 * x + 2
 
 def grad(x, y, dfx, dfy):
-    return (dfx(x), dfy(y))
+    return (dfx(x, y), dfy(x, y))
 
 def norme(vect):
     r = 0
@@ -111,7 +111,10 @@ def gradpc(eps, m, u, x0, y0, df1, df2, f):
     while i < m or norme(grad(a[i][0], a[i][1], df1, df2)) < eps:
         x = a[i-1][0]
         y = a[i-1][1]
-        a.append((x + u*grad(x, y, df1, df2), y + u*grad(x, y, df1, df2)))
+        x1 = x + u*grad(x, y, df1, df2)[0]
+        y1 = y + u*grad(x, y, df1, df2)[1]
+        a.append((x1, y1))
+        print(i)
         i += 1
 
     ax = plt.axes(projection='3d')
@@ -119,12 +122,12 @@ def gradpc(eps, m, u, x0, y0, df1, df2, f):
     Y = [A[1] for A in a]
     X, Y = np.meshgrid(X, Y)
     Z = [f(x, y) for (x, y) in a]
-    plt.axis('equal')
+    plt.axis('auto')
     ax.scatter3D(X, Y, Z, c=Z, cmap='Greens')
+    plt.show()
 
 
 if __name__ == '__main__':
-    pass
     # n = 400 #nombre d'intervalles
     # print("Minimum de la fonction entre 0 et 3 :")
     # print("Balayage à pas constant : ", balayage_const(f, 0, 3, n))
@@ -141,3 +144,5 @@ if __name__ == '__main__':
     #
     # figure3D(h)
     # courbeNiveau(h)
+
+    gradpc(10**(-3), 120, -0.001, 0, 0, dhx, dhy, h)
