@@ -1,6 +1,7 @@
 import math
 import random
 import matplotlib.pyplot as plt
+import numpy
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -67,14 +68,14 @@ def methodeDuGradient(f, df, a, b, u, n):
         x = x + u * df(x)
     return f(x)
 
-def g(x, y, a, b):
-    return (x ** 2) / a + (y ** 2) / b
+def g(x, y):
+    return (x ** 2) / 2 + (y ** 2) / (2/7)
 
-def dgx(x, y, a, b):
-    return 2 * x / a
+def dgx(x, y):
+    return 2 * x / 2
 
-def dgy(x, y, a, b):
-    return 2 * y / b
+def dgy(x, y):
+    return 2 * y / (2/7)
 
 def h(x, y):
     return np.cos(x) * np.sin(y)
@@ -93,24 +94,24 @@ def figure3D(f):
     X, Y = np.meshgrid(X, Y)
     Z = f(X, Y)
     ax.plot_surface(X, Y, Z)
-    plt.show()
 
 def courbeNiveau(f):
     f = np.vectorize(f)
-    X = np.arange(-6, 6, 0.01)
-    Y = np.arange(-6, 6, 0.01)
+    X = np.arange(-2, 2, 0.01)
+    Y = np.arange(-2, 2, 0.01)
     X, Y = np.meshgrid(X, Y)
     Z = f(X, Y)
-    plt.axis('equal')
+    plt.axis('auto')
     plt.contour(X, Y, Z, [0.1, 0.4, 0.5])
     plt.show()
 
 def gradpc(eps, m, u, x0, y0, df1, df2, f):
     a = [(x0, y0)]
     i = 0
-    while i < m or norme(grad(a[i][0], a[i][1], df1, df2)) < eps:
+    while i < m and norme(grad(a[i][0], a[i][1], df1, df2)) >= eps:
         x = a[i-1][0]
         y = a[i-1][1]
+        print(i)
         x1 = x + u*grad(x, y, df1, df2)[0]
         y1 = y + u*grad(x, y, df1, df2)[1]
         a.append((x1, y1))
@@ -121,7 +122,9 @@ def gradpc(eps, m, u, x0, y0, df1, df2, f):
     Y = [A[1] for A in a]
     Z = [f(x, y) for (x, y) in a]
     plt.axis('auto')
-    ax.scatter3D(X, Y, Z, c=Z, cmap='Greens')
+    ax.scatter3D(X, Y, Z, c=Z)
+    #figure3D(f)
+    courbeNiveau(f)
     plt.show()
 
 
@@ -143,4 +146,5 @@ if __name__ == '__main__':
     # figure3D(h)
     # courbeNiveau(h)
 
-    gradpc(10**(-3), 120, -0.001, 0, 0, dhx, dhy, h)
+    # gradpc(10**(-5), 120, -0.2, 0, 0, dhx, dhy, h)
+    gradpc(10 ** (-5), 120, -0.05, 7, 1.5, dgx, dgy, g)
