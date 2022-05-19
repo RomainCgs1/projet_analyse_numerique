@@ -63,7 +63,7 @@ def methodeDuGradient(f, df, a, b, u, n):
     return f(x)
 
 def g(x, y):
-    return (x ** 2) / 2 + (y ** 2) / (2/7)
+    return (x ** 2) / 1 + (y ** 2) / (20)
 
 def dgx(x, y):
     return 2 * x / 2
@@ -100,7 +100,7 @@ def courbeNiveau(f, ymin, ymax):
     plt.contour(X, Y, Z, courbesNiv)
     plt.show()
 
-def gradpc(eps, m, u, x0, y0, df1, df2, f):
+def gradpc(eps, m, u, x0, y0, f, df1, df2):
     a = [(x0, y0)]
     i = 0
     while i < m and norme(grad(a[i][0], a[i][1], df1, df2)) >= eps:
@@ -112,14 +112,25 @@ def gradpc(eps, m, u, x0, y0, df1, df2, f):
         a.append((x1, y1))
         i += 1
 
-    ax = plt.axes(projection='3d')
-    X = [A[0] for A in a]
-    Y = [A[1] for A in a]
+    # ax = plt.axes(projection='3d')
+    # X = [A[0] for A in a]
+    # Y = [A[1] for A in a]
+
     Z = [f(x, y) for (x, y) in a]
-    plt.axis('auto')
-    ax.scatter3D(X, Y, Z, c=Z)
-    #figure3D(f)
-    courbeNiveau(f, f(X[-1], Y[-1]), f(X[0], Y[0]))
+    return min(Z)
+
+    # plt.axis('auto')
+    # ax.scatter3D(X, Y, Z, c=Z)
+    # #figure3D(f)
+    # courbeNiveau(f, f(X[-1], Y[-1]), f(X[0], Y[0]))
+    # plt.show()
+
+def erreurAbsolueG(eps, m, umin, umax, x0, y0, f, df1, df2):
+    ea = []
+    linU = np.linspace(umin, umax, 30)
+    for u in linU:
+        ea.append(gradpc(eps, m, u, x0, y0, f, df1, df2))
+    plt.plot(u,eps)
     plt.show()
 
 
@@ -148,5 +159,6 @@ if __name__ == '__main__':
     #figure3D(h)
     #courbeNiveau(h)
 
-    gradpc(10**(-5), 120, -0.2, 0, 0, dhx, dhy, h)
-    #gradpc(10 ** (-5), 120, -0.05, 7, 1.5, dgx, dgy, g)
+    # gradpc(10**(-5), 120, -0.2, 0, 0, h, dhx, dhy)
+    #gradpc(10 ** (-5), 120, -0.05, 7, 1.5, g, dgx, dgy)
+    erreurAbsolueG(10 ** (-5), 120, -0.99, -0.001, 7, 1.5, g, dgx, dgy)
