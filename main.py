@@ -1,24 +1,18 @@
 import math
 import random
 import matplotlib.pyplot as plt
-import numpy
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 
-
-def print_hi(name):
-    print("Salut", name, "!")
-
-
 def f(x):
     return x ** 3 - 3 * x ** 2 + 2 * x + 5
-
 
 def moinsf(x):
     return -(x ** 3 - 3 * x ** 2 + 2 * x + 5)
 
 def derivF(x):
-    return 3 * x ** 2 - 6 * x + 2
+    dF = 3 * x ** 2 - 6 * x + 2
+    return dF
 
 def grad(x, y, dfx, dfy):
     return (dfx(x, y), dfy(x, y))
@@ -111,7 +105,7 @@ def gradpc(eps, m, u, x0, y0, df1, df2, f):
     while i < m and norme(grad(a[i][0], a[i][1], df1, df2)) >= eps:
         x = a[i-1][0]
         y = a[i-1][1]
-        print(i)
+        #print(i)
         x1 = x + u*grad(x, y, df1, df2)[0]
         y1 = y + u*grad(x, y, df1, df2)[1]
         a.append((x1, y1))
@@ -128,23 +122,30 @@ def gradpc(eps, m, u, x0, y0, df1, df2, f):
     plt.show()
 
 
+#def gradamax(eps, m, u, x0, y0, f, df1, df2):
+
+
+#def gradamin(eps, m, u, x0, y0, f, df1, df2):
+
+
 if __name__ == '__main__':
-    # n = 400 #nombre d'intervalles
-    # print("Minimum de la fonction entre 0 et 3 :")
-    # print("Balayage à pas constant : ", balayage_const(f, 0, 3, n))
-    # print("Balayage aléatoire : ", float(balayAleat(f, 0, 3, n)))
-    #
-    # #erreur(f, 0, 3, N)
-    #
-    #
-    # print("valeur max: ", -1*balayAleat(moinsf, -1, 2, n))
-    #
-    # nGrad = 30
-    # u = -0.1
-    # print("Min via gradient : ", methodeDuGradient(f, derivF, 0, 1, u, nGrad))
-    #
-    # figure3D(h)
-    # courbeNiveau(h)
+    n = 400 #nombre d'intervalles
+    #print("Minimum de la fonction entre 0 et 3 :")
+    #print("Balayage à pas constant : ", balayage_const(f, 0, 3, n))
+    #print("Balayage aléatoire : ", float(balayAleat(f, 0, 3, n)))
+
+    #balayage_const(f, 0, 3, n)
+    #balayAleat(f, 0, 3, n)
+    #erreur(f, 0, 3, n)
+
+    #print("Valeur max: ", -1*balayAleat(moinsf, -1, 2, n))
+
+    nGrad = 30
+    u = -0.1
+    print("Min via gradient : ", methodeDuGradient(f, derivF, 0, 1, u, nGrad))
+
+    #figure3D(h)
+    #courbeNiveau(h)
 
     # gradpc(10**(-5), 120, -0.2, 0, 0, dhx, dhy, h)
-    gradpc(10 ** (-5), 120, -0.05, 7, 1.5, dgx, dgy, g)
+    #gradpc(10 ** (-5), 120, -0.05, 7, 1.5, dgx, dgy, g)
