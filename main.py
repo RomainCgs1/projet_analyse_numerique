@@ -112,25 +112,25 @@ def gradpc(eps, m, u, x0, y0, f, df1, df2):
         a.append((x1, y1))
         i += 1
 
-    # ax = plt.axes(projection='3d')
-    # X = [A[0] for A in a]
-    # Y = [A[1] for A in a]
+    ax = plt.axes(projection='3d')
+    X = [A[0] for A in a]
+    Y = [A[1] for A in a]
 
     Z = [f(x, y) for (x, y) in a]
-    return min(Z)
 
-    # plt.axis('auto')
-    # ax.scatter3D(X, Y, Z, c=Z)
-    # #figure3D(f)
-    # courbeNiveau(f, f(X[-1], Y[-1]), f(X[0], Y[0]))
-    # plt.show()
+    plt.axis('auto')
+    ax.scatter3D(X, Y, Z, c=Z)
+    figure3D(f)
+    courbeNiveau(f, f(X[-1], Y[-1]), f(X[0], Y[0]))
+    plt.show()
+    return min(Z)
 
 def erreurAbsolueG(eps, m, umin, umax, x0, y0, f, df1, df2):
     ea = []
-    linU = np.linspace(umin, umax, 30)
+    linU = np.linspace(umin, umax, 300)
     for u in linU:
         ea.append(gradpc(eps, m, u, x0, y0, f, df1, df2))
-    plt.plot(u,eps)
+    plt.plot(linU,ea)
     plt.show()
 
 
