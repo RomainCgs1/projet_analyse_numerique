@@ -96,7 +96,7 @@ def courbeNiveau(f, ymin, ymax):
     X, Y = np.meshgrid(X, Y)
     Z = f(X, Y)
     plt.axis('auto')
-    courbesNiv = np.linspace(ymin, ymax, 10)
+    courbesNiv = np.linspace(ymin, ymax, 6)
     plt.contour(X, Y, Z, courbesNiv)
     plt.show()
 
@@ -134,10 +134,86 @@ def erreurAbsolueG(eps, m, umin, umax, x0, y0, f, df1, df2):
     plt.show()
 
 
-#def gradamax(eps, m, u, x0, y0, f, df1, df2):
+def gradamax(eps, m, u, x0, y0, f, df1, df2):
+    a = [(x0, y0)]
+    i = 0
+    while i < m and norme(grad(a[i][0], a[i][1], df1, df2)) >= eps:
+        x = a[i - 1][0]
+        y = a[i - 1][1]
+        # print(i)
+        F2 = 2
+        F1 = 1
+        k = 0
+        while F2 > F1:
+            k += 1
+            X1 = x + k * u * df1(x, y)
+            Y1 = y + k * u * df2(x, y)
+            F1 = f(X1, Y1)
 
+            X2 = x + (k+1) * u * grad(x, y, df1, df2)[0]
+            Y2 = y + (k+1) * u * grad(x, y, df1, df2)[1]
+            F2 = f(X2, Y2)
+            print(k)
+
+        xn = x + k * u * grad(x, y, df1, df2)[0]
+        yn = y + k * u * grad(x, y, df1, df2)[1]
+        a.append((xn, yn))
+        i += 1
+
+    ax = plt.axes(projection='3d')
+    X = [A[0] for A in a]
+    Y = [A[1] for A in a]
+
+    Z = [f(x, y) for (x, y) in a]
+
+    plt.axis('auto')
+    ax.scatter3D(X, Y, Z, c=Z)
+    #figure3D(f)
+    courbeNiveau(f, f(X[-1], Y[-1]), f(X[0], Y[0]))
+    plt.show()
+    return max(Z)
 
 #def gradamin(eps, m, u, x0, y0, f, df1, df2):
+
+
+def gradamin(eps, m, u, x0, y0, f, df1, df2):
+    a = [(x0, y0)]
+    i = 0
+    while i < m and norme(grad(a[i][0], a[i][1], df1, df2)) >= eps:
+        x = a[i - 1][0]
+        y = a[i - 1][1]
+        # print(i)
+        F2 = 2
+        F1 = 1
+        k = 0
+        while F2 < F1:
+            k += 1
+            X1 = x + k * u * df1(x, y)
+            Y1 = y + k * u * df2(x, y)
+            F1 = f(X1, Y1)
+
+            X2 = x + (k + 1) * u * grad(x, y, df1, df2)[0]
+            Y2 = y + (k + 1) * u * grad(x, y, df1, df2)[1]
+            F2 = f(X2, Y2)
+            print(k)
+
+        xn = x + k * u * grad(x, y, df1, df2)[0]
+        yn = y + k * u * grad(x, y, df1, df2)[1]
+        a.append((xn, yn))
+        i += 1
+
+    ax = plt.axes(projection='3d')
+    X = [A[0] for A in a]
+    Y = [A[1] for A in a]
+
+    Z = [f(x, y) for (x, y) in a]
+
+    plt.axis('auto')
+    ax.scatter3D(X, Y, Z, c=Z)
+    # figure3D(f)
+    courbeNiveau(f, f(X[0], Y[0]), f(X[-1], Y[-1]))
+    plt.show()
+    return max(Z)
 
 
 if __name__ == '__main__':
@@ -161,4 +237,6 @@ if __name__ == '__main__':
 
     # gradpc(10**(-5), 120, -0.2, 0, 0, h, dhx, dhy)
     #gradpc(10 ** (-5), 120, -0.05, 7, 1.5, g, dgx, dgy)
-    erreurAbsolueG(10 ** (-5), 120, -0.99, -0.001, 7, 1.5, g, dgx, dgy)
+    #erreurAbsolueG(10 ** (-5), 120, -0.99, -0.001, 7, 1.5, g, dgx, dgy)
+    #gradamax(10**(-5), 120, 0.2, 0, 0, h, dhx, dhy)
+    gradamin(10**(-5), 120, -0.2, 0, 0, h, dhx, dhy)
