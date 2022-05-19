@@ -89,14 +89,15 @@ def figure3D(f):
     Z = f(X, Y)
     ax.plot_surface(X, Y, Z)
 
-def courbeNiveau(f):
+def courbeNiveau(f, ymin, ymax):
     f = np.vectorize(f)
-    X = np.arange(-2, 2, 0.01)
-    Y = np.arange(-2, 2, 0.01)
+    X = np.arange(-7, 7, 0.01)
+    Y = np.arange(-7, 7, 0.01)
     X, Y = np.meshgrid(X, Y)
     Z = f(X, Y)
     plt.axis('auto')
-    plt.contour(X, Y, Z, [0.1, 0.4, 0.5])
+    courbesNiv = np.linspace(ymin, ymax, 10)
+    plt.contour(X, Y, Z, courbesNiv)
     plt.show()
 
 def gradpc(eps, m, u, x0, y0, df1, df2, f):
@@ -118,7 +119,7 @@ def gradpc(eps, m, u, x0, y0, df1, df2, f):
     plt.axis('auto')
     ax.scatter3D(X, Y, Z, c=Z)
     #figure3D(f)
-    courbeNiveau(f)
+    courbeNiveau(f, f(X[-1], Y[-1]), f(X[0], Y[0]))
     plt.show()
 
 
@@ -147,5 +148,5 @@ if __name__ == '__main__':
     #figure3D(h)
     #courbeNiveau(h)
 
-    # gradpc(10**(-5), 120, -0.2, 0, 0, dhx, dhy, h)
+    gradpc(10**(-5), 120, -0.2, 0, 0, dhx, dhy, h)
     #gradpc(10 ** (-5), 120, -0.05, 7, 1.5, dgx, dgy, g)
