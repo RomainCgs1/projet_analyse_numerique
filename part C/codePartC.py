@@ -129,7 +129,7 @@ def gradamax(eps, m, u, x0, y0, f, df1, df2):
     yMax = max(f(X[-1], Y[-1]), f(X[0], Y[0]))
     courbeNiveau(f, yMin, yMax)
     plt.show()
-    return max(Z)
+    return max(Z), i-1
 
 def gradamin(eps, m, u, x0, y0, f, df1, df2):
     a = [(x0, y0)]
@@ -172,7 +172,18 @@ def gradamin(eps, m, u, x0, y0, f, df1, df2):
         yMax += 2
     courbeNiveau(f, yMin, yMax)
     plt.show()
-    return min(Z)
+    return min(Z), i-1
+
+def grada_iterations(eps, umin, umax, x0, y0, f, df1, df2, max):
+    linU = np.linspace(umin, umax, 300)
+    nbIter = []
+    for u in linU:
+        if max:
+            nbIter.append(gradamax(eps, u, x0, y0, f, df1, df2, False)[1])
+        else:
+            nbIter.append(gradamin(eps, u, x0, y0, f, df1, df2, False)[1])
+    plt.plot(u, nbIter)
+    plt.show()
 
 def q2():
     fct = input("Fonction g ou h ? g/h ")
@@ -213,5 +224,10 @@ def q8():
 def q9():
     gradamin(10 ** (-5), 120, -0.2, 0, 0, h, dhx, dhy)
 
+def q10():
+    F = G(1, 20)
+    grada_iterations(10 ** (-5), -0.999, 0.001, 7, 1.5, F.g, F.dgx, F.dgy, True)
+    grada_iterations(10 ** (-5), -0.999, 0.001, 7, 1.5, F.g, F.dgx, F.dgy, False)
+
 if __name__ == '__main__':
-    q9()
+    q10()
