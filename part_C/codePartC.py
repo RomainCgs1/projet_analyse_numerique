@@ -93,7 +93,7 @@ def erreurAbsolueG(eps, m, umin, umax, x0, y0, f, df1, df2):
     plt.show()
 
 
-def gradamax(eps, m, u, x0, y0, f, df1, df2):
+def gradamax(eps, m, u, x0, y0, f, df1, df2, graph):
     a = [(x0, y0)]
     i = 0
     while i < m and norme(grad(a[i][0], a[i][1], df1, df2)) >= eps:
@@ -123,15 +123,16 @@ def gradamax(eps, m, u, x0, y0, f, df1, df2):
 
     Z = [f(x, y) for (x, y) in a]
 
-    plt.axis('auto')
-    ax.scatter3D(X, Y, Z, c=Z)
-    yMin = min(f(X[-1], Y[-1]), f(X[0], Y[0]))
-    yMax = max(f(X[-1], Y[-1]), f(X[0], Y[0]))
-    courbeNiveau(f, yMin, yMax)
-    plt.show()
+    if graph:
+        plt.axis('auto')
+        ax.scatter3D(X, Y, Z, c=Z)
+        yMin = min(f(X[-1], Y[-1]), f(X[0], Y[0]))
+        yMax = max(f(X[-1], Y[-1]), f(X[0], Y[0]))
+        courbeNiveau(f, yMin, yMax)
+        plt.show()
     return max(Z), i-1
 
-def gradamin(eps, m, u, x0, y0, f, df1, df2):
+def gradamin(eps, m, u, x0, y0, f, df1, df2, graph):
     a = [(x0, y0)]
     i = 0
     while i < m and norme(grad(a[i][0], a[i][1], df1, df2)) >= eps:
@@ -163,15 +164,16 @@ def gradamin(eps, m, u, x0, y0, f, df1, df2):
 
     Z = [f(x, y) for (x, y) in a]
 
-    plt.axis('auto')
-    ax.scatter3D(X, Y, Z, c=Z)
-    yMin = min(f(X[-1], Y[-1]), f(X[0], Y[0]))
-    yMax = max(f(X[-1], Y[-1]), f(X[0], Y[0]))
-    if(yMin == yMax):
-        yMin -= 2
-        yMax += 2
-    courbeNiveau(f, yMin, yMax)
-    plt.show()
+    if graph:
+        plt.axis('auto')
+        ax.scatter3D(X, Y, Z, c=Z)
+        yMin = min(f(X[-1], Y[-1]), f(X[0], Y[0]))
+        yMax = max(f(X[-1], Y[-1]), f(X[0], Y[0]))
+        if(yMin == yMax):
+            yMin -= 2
+            yMax += 2
+        courbeNiveau(f, yMin, yMax)
+        plt.show()
     return min(Z), i-1
 
 def q2():
@@ -207,10 +209,10 @@ def q7():
     erreurAbsolueG(10 ** (-5), 120, -0.99, -0.001, 7, 1.5, F.g, F.dgx, F.dgy)
 
 def q8():
-    gradamax(10 ** (-5), 120, 0.2, 0, 0, h, dhx, dhy)
+    gradamax(10 ** (-5), 120, 0.2, 0, 0, h, dhx, dhy, True)
 
 def q9():
-    gradamin(10 ** (-5), 120, -0.2, 0, 0, h, dhx, dhy)
+    gradamin(10 ** (-5), 120, -0.2, 0, 0, h, dhx, dhy, True)
 
 if __name__ == '__main__':
     q9()
