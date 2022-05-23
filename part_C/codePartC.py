@@ -129,7 +129,7 @@ def gradamax(eps, m, u, x0, y0, f, df1, df2):
     yMax = max(f(X[-1], Y[-1]), f(X[0], Y[0]))
     courbeNiveau(f, yMin, yMax)
     plt.show()
-    return max(Z)
+    return max(Z), i-1
 
 def gradamin(eps, m, u, x0, y0, f, df1, df2):
     a = [(x0, y0)]
@@ -172,7 +172,7 @@ def gradamin(eps, m, u, x0, y0, f, df1, df2):
         yMax += 2
     courbeNiveau(f, yMin, yMax)
     plt.show()
-    return min(Z)
+    return min(Z), i-1
 
 def q2():
     fct = input("Fonction g ou h ? g/h ")
@@ -201,7 +201,6 @@ def q6():
     m = 120
     u = -0.2
     gradpc(eups, m, u, x0, y0, f, dfx, dfy, True)
-
 
 def q7():
     F = G(1, 20)
