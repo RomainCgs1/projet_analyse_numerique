@@ -176,14 +176,14 @@ def gradamin(eps, m, u, x0, y0, f, df1, df2, graph):
         plt.show()
     return min(Z), i-1
 
-def grada_iterations(eps, umin, umax, x0, y0, f, df1, df2, max):
+def grada_iterations(eps, m, umin, umax, x0, y0, f, df1, df2, max):
     linU = np.linspace(umin, umax, 300)
     nbIter = []
     for u in linU:
         if max:
-            nbIter.append(gradamax(eps, u, x0, y0, f, df1, df2, False)[1])
+            nbIter.append(gradamax(eps, m, u, x0, y0, f, df1, df2, False)[1])
         else:
-            nbIter.append(gradamin(eps, u, x0, y0, f, df1, df2, False)[1])
+            nbIter.append(gradamin(eps, m, u, x0, y0, f, df1, df2, False)[1])
     plt.plot(u, nbIter)
     plt.show()
 
@@ -228,8 +228,8 @@ def q9():
 
 def q10():
     F = G(1, 20)
-    grada_iterations(10 ** (-5), -0.999, 0.001, 7, 1.5, F.g, F.dgx, F.dgy, True)
-    grada_iterations(10 ** (-5), -0.999, 0.001, 7, 1.5, F.g, F.dgx, F.dgy, False)
+    grada_iterations(10 ** (-5), 120, -0.999, 0.001, 7, 1.5, F.g, F.dgx, F.dgy, True)
+    grada_iterations(10 ** (-5), 120, -0.999, 0.001, 7, 1.5, F.g, F.dgx, F.dgy, False)
 
 if __name__ == '__main__':
     q10()
