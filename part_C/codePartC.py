@@ -94,6 +94,8 @@ def erreurAbsolueG(eps, m, umin, umax, x0, y0, f, df1, df2):
 
 
 def gradamax(eps, m, u, x0, y0, f, df1, df2, graph):
+    if u < 0:
+        u = -u
     a = [(x0, y0)]
     i = 0
     while i < m and norme(grad(a[i][0], a[i][1], df1, df2)) >= eps:
@@ -102,7 +104,8 @@ def gradamax(eps, m, u, x0, y0, f, df1, df2, graph):
         F2 = 2
         F1 = 1
         k = 0
-        while F2 > F1:
+        print(i)
+        while F2 > F1 and k<m:
             k += 1
             X1 = x + k * u * df1(x, y)
             Y1 = y + k * u * df2(x, y)
@@ -130,7 +133,7 @@ def gradamax(eps, m, u, x0, y0, f, df1, df2, graph):
         yMax = max(f(X[-1], Y[-1]), f(X[0], Y[0]))
         courbeNiveau(f, yMin, yMax)
         plt.show()
-    return max(Z), i-1
+    return max(Z), i
 
 def gradamin(eps, m, u, x0, y0, f, df1, df2, graph):
     a = [(x0, y0)]
@@ -174,17 +177,24 @@ def gradamin(eps, m, u, x0, y0, f, df1, df2, graph):
             yMax += 2
         courbeNiveau(f, yMin, yMax)
         plt.show()
-    return min(Z), i-1
+    return min(Z), i
 
 def grada_iterations(eps, m, umin, umax, x0, y0, f, df1, df2, max):
-    linU = np.linspace(umin, umax, 300)
+    linU = np.linspace(umin, umax, 20)
     nbIter = []
     for u in linU:
         if max:
             nbIter.append(gradamax(eps, m, u, x0, y0, f, df1, df2, False)[1])
         else:
             nbIter.append(gradamin(eps, m, u, x0, y0, f, df1, df2, False)[1])
-    plt.plot(u, nbIter)
+    div = True
+    for n in nbIter:
+        if n != m:
+            div = False
+    if div:
+        print("La méthode du gradient ne converge pas. La fonction semple ne pas avoir l'extremum demandé.")
+    plt.axis('auto')
+    plt.plot(linU, nbIter)
     plt.show()
 
 def q2():
