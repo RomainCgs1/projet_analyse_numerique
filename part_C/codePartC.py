@@ -18,7 +18,6 @@ class G:
     def dgy(self, x, y):
         return 2 * y / self.b
 
-
 def h(x, y):
     return np.cos(x) * np.sin(y)
 
@@ -192,9 +191,9 @@ def grada_iterations(eps, m, umin, umax, x0, y0, f, df1, df2, max):
         if n != m:
             div = False
     if div:
-        print("La méthode du gradient ne converge pas. La fonction semple ne pas avoir l'extremum demandé.")
+        print("La méthode du gradient ne converge pas. La fonction semble ne pas avoir l'extremum demandé.")
     plt.axis('auto')
-    plt.plot(linU, nbIter)
+    plt.plot(linU, nbIter) # IL FAUT LE PLOT EN 2D!!!!!
     plt.show()
 
 def q2():
@@ -224,7 +223,6 @@ def q6():
     m = 120
     u = -0.2
     gradpc(eups, m, u, x0, y0, f, dfx, dfy, True)
-
 
 def q7():
     F = G(1, 20)
