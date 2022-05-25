@@ -32,17 +32,21 @@ def matrInv(eups, m, A, b, n, y0):
             rhok = nom / denom
         yK1, yK = yK - rhok * G, yK1
         i += 1
-    print(i)
     return yK1
 
 
-def q1(n):
+def q2(A, b, y0, n):
+    y = matrInv(10 ** (-5), 120, A, b, n, y0)
+    return y
+
+def q3():
+    n = int(input("Donner une valeur pour n : "))
     A = np.diag(2 * np.ones(n)) + np.diag(6 * np.ones(n - 1), -1) + np.diag(6 * np.ones(n - 1), 1)
     b = [int(random() * 100) for i in range(n)]
-    y0 = [int(random()*100) for i in range(n)]
-    y = matrInv(10 ** (-5), 120, A, b, n, y0)
+    y0 = [int(random() * 100) for i in range(n)]
+    y = q2(A, b, y0, n)
     print(y)
 
 
 if __name__ == "__main__":
-    q1(5)
+    q3()
