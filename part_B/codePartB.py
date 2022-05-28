@@ -1,7 +1,6 @@
 import math
 import numpy as np
 from matplotlib import pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 import random
 
 
@@ -77,6 +76,18 @@ def q6(nGrad):
 
 
 if __name__ == '__main__':
-    n = 30  # nombre d'intervales ou d'itérations en fonction de la question
-    q6(n)
+    q = int(input("Quelle question voulez vous tester (2, 3, 4 ou 6) ?"))
+    if 2 <= q <= 4:
+        n = int(input("Combien d'intervalles ?"))
+        if q == 2:
+            q2(n)
+        elif q == 3:
+            q3(n)
+        elif q == 4:
+            q4(n)
+    elif q == 6:
+        n = int(input("Combien d'itérations ?"))
+        q6(n)
+    else:
+        print("Question non trouvée")
 

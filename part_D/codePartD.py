@@ -57,4 +57,5 @@ def q3verif():  # Comparaison entre lg.solve, matrInv et une résolution à la m
 
 
 if __name__ == "__main__":
-    q3verif()
+    print("Une version de la question 3 avec des coeffs aléatoirs : ")
+    q3()

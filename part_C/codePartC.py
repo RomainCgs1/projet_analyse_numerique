@@ -202,8 +202,11 @@ def q2():
         f = G(2, 2/7).g
     elif fct == 'h':
         f = h
-    figure3D(f)
-    courbeNiveau(f, -1, 1)  # invisible si la figure 3D est affichée
+    cas = input("Courbe de niveau ou figure 3D (c/f)")
+    if cas == "f":
+        figure3D(f)
+    elif cas == "c":
+        courbeNiveau(f, -1, 1)  # invisible si la figure 3D est affichée
 
 def q6():
     fct = input("Fonction g ou h ? g/h ")
@@ -265,4 +268,18 @@ def q10():
     grada_iterations(10 ** (-5), 120, -0.999, 0.001, 7, 1.5, F.g, F.dgx, F.dgy, False)
 
 if __name__ == '__main__':
-    q9()
+    q = int(input("Quelle question voulez vous tester (2, 6, 7, 8, 9 ou 10) ?"))
+    if q == 2:
+        q2()
+    elif q == 6:
+        q6()
+    elif q == 7:
+        q7()
+    elif q == 8:
+        q8()
+    elif q == 9:
+        q9()
+    elif q == 10:
+        q10()
+    else:
+        print("Question non trouvée")
