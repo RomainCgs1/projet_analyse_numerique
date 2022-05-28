@@ -39,6 +39,7 @@ def q2(A, b, y0, n):
     y = matrInv(10 ** (-5), 120, A, b, n, y0)
     return y
 
+
 def q3():
     n = int(input("Donner une valeur pour n : "))
     A = np.diag(2 * np.ones(n)) + np.diag(6 * np.ones(n - 1), -1) + np.diag(6 * np.ones(n - 1), 1)
@@ -48,5 +49,12 @@ def q3():
     print(y)
 
 
+def q3verif():  # Comparaison entre lg.solve, matrInv et une résolution à la main pour tester la méthode. Elle fonctionne.
+    An = [[4, 1], [3, 6]]
+    bn = [1, 1]
+    print(np.linalg.solve(An, bn))
+    print(matrInv(10 ** (-5), 120, An, bn, 2, [int(random() * 100) for i in range(2)]))
+
+
 if __name__ == "__main__":
-    q3()
+    q3verif()

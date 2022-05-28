@@ -229,10 +229,35 @@ def q7():
     erreurAbsolueG(10 ** (-5), 120, -0.99, -0.001, 7, 1.5, F.g, F.dgx, F.dgy)
 
 def q8():
-    gradamax(10 ** (-5), 120, 0.2, 0, 0, h, dhx, dhy, True)
+    fct = input("Fonction g ou h ? g/h ")
+    if fct == 'g':
+        print("L'algorithme ne convergera pas car la fonction g n'a pas de maximum.")
+        F = G(2, 2 / 7)
+        f = F.g
+        dfx = F.dgx
+        dfy = F.dgy
+        x0, y0 = 7, 1.5
+    elif fct == 'h':
+        f = h
+        dfx = dhx
+        dfy = dhy
+        x0, y0 = 0, 0
+    gradamax(10 ** (-5), 120, 0.2, x0, y0, f, dfx, dfy, True)
 
 def q9():
-    gradamin(10 ** (-5), 120, -0.2, 0, 0, h, dhx, dhy, True)
+    fct = input("Fonction g ou h ? g/h ")
+    if fct == 'g':
+        F = G(2, 2 / 7)
+        f = F.g
+        dfx = F.dgx
+        dfy = F.dgy
+        x0, y0 = 7, 1.5
+    elif fct == 'h':
+        f = h
+        dfx = dhx
+        dfy = dhy
+        x0, y0 = 0, 0
+    gradamin(10 ** (-5), 120, -0.2, x0, y0, f, dfx, dfy, True)
 
 def q10():
     F = G(1, 20)
@@ -240,4 +265,4 @@ def q10():
     grada_iterations(10 ** (-5), 120, -0.999, 0.001, 7, 1.5, F.g, F.dgx, F.dgy, False)
 
 if __name__ == '__main__':
-    q10()
+    q9()
