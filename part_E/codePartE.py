@@ -62,8 +62,8 @@ def q2(n, a, b):
     plt.show()
 
 def questions():
-    q = int(input("Quelle question voulez vous tester (1 ou 2) ?"))
-    n = int(input("Combien d'intervalles ?"))
+    q = int(input("Quelle question voulez vous tester (1 ou 2) ? "))
+    n = int(input("Combien d'intervalles ? "))
     a = 500
     b = 350
     if q == 1:

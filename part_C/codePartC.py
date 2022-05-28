@@ -268,7 +268,7 @@ def q10():
     grada_iterations(10 ** (-5), 120, -0.999, 0.001, 7, 1.5, F.g, F.dgx, F.dgy, False)
 
 if __name__ == '__main__':
-    q = int(input("Quelle question voulez vous tester (2, 6, 7, 8, 9 ou 10) ?"))
+    q = int(input("Quelle question voulez vous tester (2, 6, 7, 8, 9 ou 10) ? "))
     if q == 2:
         q2()
     elif q == 6:

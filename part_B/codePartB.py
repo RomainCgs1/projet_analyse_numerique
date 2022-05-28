@@ -67,7 +67,7 @@ def q3(n):
 
 def q4(n):
     print("Maximum de la fonction :")
-    print(-1 * balayage_const(moinsf, 0, 4, n))
+    print(-1 * balayage_const(moinsf, -1, 1, n))
 
 
 def q6(nGrad):
@@ -76,9 +76,9 @@ def q6(nGrad):
 
 
 if __name__ == '__main__':
-    q = int(input("Quelle question voulez vous tester (2, 3, 4 ou 6) ?"))
+    q = int(input("Quelle question voulez vous tester (2, 3, 4 ou 6) ? "))
     if 2 <= q <= 4:
-        n = int(input("Combien d'intervalles ?"))
+        n = int(input("Combien d'intervalles ? "))
         if q == 2:
             q2(n)
         elif q == 3:
@@ -86,7 +86,7 @@ if __name__ == '__main__':
         elif q == 4:
             q4(n)
     elif q == 6:
-        n = int(input("Combien d'itérations ?"))
+        n = int(input("Combien d'itérations ? "))
         q6(n)
     else:
         print("Question non trouvée")
