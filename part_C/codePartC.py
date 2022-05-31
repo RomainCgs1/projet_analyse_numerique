@@ -39,13 +39,20 @@ def grad(x, y, dfx, dfy):
     return (dfx(x, y), dfy(x, y))
 
 def figure3D(f):
-    ax = Axes3D(plt.figure())
+    #fig = plt.figure()
+    ax = plt.axes(projection='3d')
+    #ax = Axes3D(plt.figure())
+    #ax.contour3D()
     f = np.vectorize(f)
     X = np.arange(-8, 8, 0.01)
     Y = np.arange(-8, 8, 0.01)
     X, Y = np.meshgrid(X, Y)
     Z = f(X, Y)
     ax.plot_surface(X, Y, Z)
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
+    plt.show()
 
 def courbeNiveau(f, ymin, ymax):
     f = np.vectorize(f)
