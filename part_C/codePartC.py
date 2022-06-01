@@ -218,13 +218,18 @@ def q2():
     fct = input("Fonction g ou h ? g/h ")
     if fct == 'g':
         f = G(2, 2 / 7).g
+        f = G(2, 2/7).g
+        ymin = -1
+        ymax = 30
     elif fct == 'h':
         f = h
+        ymin = -1
+        ymax = 1
     cas = input("Courbe de niveau ou figure 3D (c/f)")
     if cas == "f":
         figure3D(f)
     elif cas == "c":
-        courbeNiveau(f, -1, 1)  # invisible si la figure 3D est affichée
+        courbeNiveau(f, ymin, ymax)  # invisible si la figure 3D est affichée
 
 
 def q6():

@@ -42,9 +42,9 @@ def q2(A, b, y0, n):
 
 def q3():
     n = int(input("Donner une valeur pour n : "))
-    A = np.diag(2 * np.ones(n)) + np.diag(6 * np.ones(n - 1), -1) + np.diag(6 * np.ones(n - 1), 1)
-    b = [int(random() * 100) for i in range(n)]
-    y0 = [int(random() * 100) for i in range(n)]
+    A = np.diag(2 * np.ones(n)) + np.diag(-1 * np.ones(n - 1), -1) + np.diag(-1 * np.ones(n - 1), 1)
+    b = [int(random() * 10) for i in range(n)]
+    y0 = [int(random() * 10) for i in range(n)]
     y = q2(A, b, y0, n)
     print('Calcul : ', y)
     print('Approximation : ', np.linalg.solve(A, b))
