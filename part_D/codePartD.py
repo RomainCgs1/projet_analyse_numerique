@@ -46,16 +46,17 @@ def q3():
     b = [int(random() * 100) for i in range(n)]
     y0 = [int(random() * 100) for i in range(n)]
     y = q2(A, b, y0, n)
-    print(y)
+    print('Calcul : ', y)
+    print('Approximation : ', np.linalg.solve(A, b))
 
 
 def q3verif():  # Comparaison entre lg.solve, matrInv et une résolution à la main pour tester la méthode. Elle fonctionne.
-    An = [[4, 1], [3, 6]]
+    An = [[4, 1], [1, 4]]
     bn = [1, 1]
     print(np.linalg.solve(An, bn))
     print(matrInv(10 ** (-5), 120, An, bn, 2, [int(random() * 100) for i in range(2)]))
 
 
 if __name__ == "__main__":
-    print("Une version de la question 3 avec des coeffs aléatoirs : ")
+    print("Une version de la question 3 avec des coeffs aléatoires : ")
     q3()

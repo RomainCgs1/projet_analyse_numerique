@@ -11,9 +11,11 @@ def f(x):
 def moinsf(x):
     return -1 * f(x)
 
+
 def derivF(x):
     dF = 3 * x ** 2 - 6 * x + 2
     return dF
+
 
 minReel = 5 - 2 / (3 * math.sqrt(3))
 maxReel = 5 + 2 / (3 * math.sqrt(3))
@@ -48,6 +50,7 @@ def erreur(f, a, b, n):
     plt.plot(pas, y)
     plt.show()
 
+
 def methodeDuGradient(f, df, a, b, u, n):
     x = random.uniform(a, b)
     for i in range(n):
@@ -72,7 +75,8 @@ def q4(n):
 
 def q6(nGrad):
     u = -0.1
-    print("Min de f avec le gradient 1D à pas constant en", nGrad, "itérations :", methodeDuGradient(f, derivF, 0, 1, u, nGrad))
+    print("Min de f avec le gradient 1D à pas constant en", nGrad, "itérations :",
+          methodeDuGradient(f, derivF, 0, 1, u, nGrad))
 
 
 if __name__ == '__main__':
@@ -90,4 +94,3 @@ if __name__ == '__main__':
         q6(n)
     else:
         print("Question non trouvée")
-
