@@ -74,7 +74,7 @@ def questions():
     if q == 1:
         q1(n, a, b)
     elif q == 2:
-        q2(10, 500, 350)
+        q2(n, a, b)
     else:
         print("Question non trouvée")
 

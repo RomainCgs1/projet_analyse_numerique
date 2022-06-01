@@ -86,6 +86,7 @@ def gradpc(eps, m, u, x0, y0, f, df1, df2, graph):
 
     Z = [f(x, y) for (x, y) in a]
 
+    print("Nombre d'itérations :", i)
     if graph:
         ax = plt.axes(projection='3d')
         X = [A[0] for A in a]
@@ -133,7 +134,7 @@ def gradamax(eps, m, u, x0, y0, f, df1, df2, graph):
         yn = y + k * u * grad(x, y, df1, df2)[1]
         a.append((xn, yn))
         i += 1
-
+    print("Nombre d'itérations :", i)
     ax = plt.axes(projection='3d')
     X = [A[0] for A in a]
     Y = [A[1] for A in a]
@@ -182,6 +183,7 @@ def gradamin(eps, m, u, x0, y0, f, df1, df2, graph):
 
     Z = [f(x, y) for (x, y) in a]
 
+    print("Nombre d'itérations :", i)
     if graph:
         plt.axis('auto')
         ax.scatter3D(X, Y, Z, c=Z)
